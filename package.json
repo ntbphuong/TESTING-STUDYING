@@ -1,0 +1,33 @@
+{
+  "name": "testing-studying",
+  "version": "1.0.0",
+  "description": "Du an Web HTML Css JS demo hoc  test AI & CI/CD",
+  "keywords": [
+    "web",
+    "demo",
+    "ai",
+    "ci",
+    "cd"
+  ],
+  "homepage": "https://github.com/ntbphuong/TESTING-STUDYING#readme",
+  "bugs": {
+    "url": "https://github.com/ntbphuong/TESTING-STUDYING/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ntbphuong/TESTING-STUDYING.git"
+  },
+  "license": "ISC",
+  "author": "BinhPhuong",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.60.0",
+    "@vitest/coverage-v8": "^4.1.7",
+    "http-server": "^14.1.1",
+    "vitest": "^4.1.7"
+  }
+}
