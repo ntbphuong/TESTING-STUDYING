@@ -1,11 +1,27 @@
-function login(emailInput, passwordInput){
+// Ham Unit: Kiem tra email hop le
+export function checkEmail(email) {
+    if (email == "") {
+       return false;
+    }
+    return true;
+}
+// Ham Unit: Kiem tra mat khau hop le
+export function checkPassword(password) {
+    if (password == "") {
+       return false;
+    }
+    return true;
+}
+export function login(emailInput, passwordInput){
     // Kiem tra email
-    if(!emailInput) {
-        return "Vui long nhap email"
+    var isValidEmail = checkEmail(emailInput);
+    if(!isValidEmail) {
+        return "Email khong hop le";
     }
     // Kiem tra mật khẩu
-    if(!passwordInput) {
-        return "Vui long nhap mật khẩu"
+    var isValidEmail = checkPassword(passwordInput);
+    if(!isValidpasswordInput) {
+        return "Vui long nhap mật khẩu";
     }
     // Kiem tra tài khoản có đúng không
     // Giả sử: admin@gmail.com và 123456 là đúng
