@@ -18,18 +18,22 @@ export function login(emailInput, passwordInput){
     // Kiem tra email
     var isValidEmail = checkEmail(emailInput);
     if(!isValidEmail) {
-        return "Email khong hop le";
+        return "Email khong hop le.";
     }
     // Kiem tra mật khẩu
-    var isValidEmail = checkPassword(passwordInput);
+    var isValidpasswordInput = checkPassword(passwordInput);
     if(!isValidpasswordInput) {
         return "Vui long nhap mật khẩu";
     }
     // Kiem tra tài khoản có đúng không
     // Giả sử: admin@gmail.com và 123456 là đúng
-    if(!emailInput == "admin@gmail.com" && passwordInput =="123456") {
+    if(emailInput == "admin@gmail.com" && passwordInput =="123456") {
         return "Đăng nhập thành công!";
     } else{
         return "Đăng nhập thất bại";
     }
+}
+// Giu tuong thich
+if(typeof window !== "undefined") {
+    window.login = login;
 }
