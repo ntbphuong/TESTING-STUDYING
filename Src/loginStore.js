@@ -2,6 +2,8 @@
 export function checkEmail(email) {
     if (email == "") {
        return false;
+    } else if(email.length < 3){
+        return false;
     }
     return true;
 }

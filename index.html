@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TODO-WEB</title>
     <link type="text/css" href="styles/main.css" rel="stylesheet" />
-    <script src="src/loginStore.js"></script>
+    <script type="module" src="src/loginStore.js"></script>
 </head>
 <body>
     <h1>SIGN IN</h1>
@@ -29,8 +29,8 @@
             //Gọi hàm xử lý
             var thongbao = login(email, password);
             // Hiển thị kết quả
-             alert(thongbao);
-            
+            document.getElementById("login-message").innerHTML = thongbao;
+            //alert(thongbao);
         });
      </script>
 </body>

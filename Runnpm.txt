@@ -1,0 +1,4 @@
+npm install -D vitest
+npm install -D @vitest/coverage-v8
+npm install -D @playwright/test
+npm install -D http-server
