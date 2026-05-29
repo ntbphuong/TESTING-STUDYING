@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tinh Tien</title>
+    <script type="module" src="Src/discountStore.js"></script>
+</head>
+<body>
+    <h1>TINH TIEN SAU GIAM GIA</h1>
+    <!-- Thẻ FORM -->
+    <form>
+        <label>Gia goc VND</label>
+        <input type="number" id="numSoTien"/>
+        <br />
+        <label>Giam gia (%)</label>
+        <input type="number" id="numPhanTram"/>
+        <br />
+        <button type="button" id="btnTinhTien" > Tinh Tien</button>
+        <div id="ketqua"></div>
+     </form>
+     <script>
+        const btnTinhTien = document.getElementById("btnTinhTien");
+        btnTinhTien.addEventListener("click", function(event) {
+            event.preventDefault(); 
+            // 1.Thu thập thông tin trên các ô nhập liệu
+            var soTien = document.getElementById("numSoTien").value;
+            var phanTram = document.getElementById("numPhanTram").value;
+            // 2. Tinh Tien
+            var ketqua = tinhTien(soTien, phanTram);
+            
+            // Hiển thị kết quả
+            document.getElementById("ketqua").innerHTML = ketqua;
+
+        });
+     </script>
+</body>
+</html>
