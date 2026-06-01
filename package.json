@@ -24,7 +24,10 @@
   "scripts": {
     "test:unit": "vitest run tests/unit",
     "test:e2e": "playwright test --ui",
-    "test:e2e:report": "playwright show-report"
+    "test:e2e:report": "playwright show-report",
+    "test:unit:checkgia": "vitest run tests/unit/discount.unit.test.js",
+    "test:e2e:tinhtien": "playwright test --ui",
+    "test:e2e:tinhtien:report": "playwright show-report"
   },
   "devDependencies": {
     "@playwright/test": "^1.60.0",

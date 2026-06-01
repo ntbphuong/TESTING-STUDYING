@@ -14,7 +14,7 @@ export function validatePhanTram(phantram) {
         return "Vui long nhap phan tram giam gia";
     }
     if(phantram < 0) {
-        return "Phantram giam gia phai > 0";
+        return "Phan tram giam gia phai > 0";
     }
     return "";
 }
