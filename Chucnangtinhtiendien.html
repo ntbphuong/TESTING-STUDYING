@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tinh Tien Dien</title>
+    <link type="text/css" href="styles/CNtinhtiendien.css" rel="stylesheet" />
     <script type="module" src="Src/CalElecStore.js">   </script>
 </head>
 <body>
     <h1>TINH TIEN DIEN</h1>
     <!-- Thẻ FORM -->
-    <form>
+    <form id = "frmCal">
         <label>Gia goc VND</label>
         <input type="number" id="kwh-input"/>
         
@@ -18,7 +19,7 @@
      </form>
      <script>
         const frmCal = document.getElementById("frmCal");
-        btnTinhTien.addEventListener("submit", function(event) {
+        frmCal.addEventListener("submit", function(event) {
             event.preventDefault(); // Ngan chan su kien submit cua HTML
             // 1.Thu thập thông tin trên các ô nhập liệu
             const soKwh = document.getElementById("kwh-input").value;

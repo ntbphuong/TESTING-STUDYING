@@ -27,7 +27,10 @@
     "test:e2e:report": "playwright show-report",
     "test:unit:checkgia": "vitest run tests/unit/discount.unit.test.js",
     "test:e2e:tinhtien": "playwright test --ui",
-    "test:e2e:tinhtien:report": "playwright show-report"
+    "test:e2e:tinhtien:report": "playwright show-report",
+    "test:unit:tinhtiendien": "vitest run tests/unit/CalElec.unit.test.js",
+    "test:e2e:tinhtiendien": "playwright test --ui",
+    "test:bus:tinhtiendien": "vitest run tests/business/CalElec.business.test.js"
   },
   "devDependencies": {
     "@playwright/test": "^1.60.0",

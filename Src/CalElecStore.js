@@ -29,7 +29,7 @@ export function tinhtoan(soKwh) {
         return tongtien
     }
     // Tinh tien khuc bac 3
-    tongtien += 50 * 1800;
+    tongtien += 50 * 2000;
     tongtien += (soKwh - 100) * 2500;
     return tongtien;
 }
