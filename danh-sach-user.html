@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh sach nguoi dung</title>
+    <script type="module" src="Src/userStore.js"> </script>
+</head>
+</head>
+<body>
+    <h1>Danh sach nguoi dung</h1>
+    <!-- Thẻ FORM -->
+    <form id = "frmuser">
+        <label>Dia chi API URL</label>
+        <input type="text" id="api-url" value="https://jsonplaceholder.typicode.com/users"/>
+        
+        <button type="submit" id="fetch-button" > Lay du lieu</button>
+        <div id="result"></div>
+     </form>
+     <script>
+        const frmuser = document.getElementById("frmuser");
+        frmuser.addEventListener("submit", async(event) => {
+            event.preventDefault(); // Ngan chan su kien submit cua HTML
+            const resultDiv = document.getElementById("result");
+            // 1.Thu thập thông tin trên các ô nhập liệu
+            const apiUrl = document.getElementById("api-url").value;
+           
+            // 2. Goi ham xu ly API
+            try{
+                const html = await loadUser(apiUrl);
+                
+                resultDiv.innerHTML = html;
+            } catch(error) {
+                // Neu co loi  quang ra bat loi va hien thi thong bao
+                resultDiv.innerHTML = error;
+            }
+     });
+     </script>
+</body>
+</html>                      
+            
+            
+      
