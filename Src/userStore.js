@@ -30,6 +30,7 @@ export function validateUser(data){
     if(!isValid){
         return "Cau truc quy dinh phai co cac key id, name, email, phone";
     }
+    return "Du lieu hop le";
 }
 // Ham Business : Lay du lieu user va trinh dien
 export async function loadUser(apiUrl){
@@ -39,7 +40,7 @@ export async function loadUser(apiUrl){
 
     // 2. Kiem tra
     const error = validateUser(data);
-    if(error != undefined && error !=""){
+    if(error != undefined && error !="Du lieu hop le"){
         return error;
     }
 
@@ -50,7 +51,7 @@ export async function loadUser(apiUrl){
         html += `Ho ten: ${user.name} - `;
         html += `Email: ${user.email} - `;
         html += `Thanh pho: ${user.address.city} `;
-        html += '<li>';
+        html += '</li>';
     });
     html += '</ul>';
     return html;
