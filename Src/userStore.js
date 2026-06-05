@@ -36,8 +36,14 @@ export async function loadUser(apiUrl){
     // 1. Goi ham xu ly API
       
      const data = await fetchUser(apiUrl);
-const error != validateUser={}
+
     // 2. Kiem tra
+    const error = validateUser(data);
+    if(error != undefined && error !=""){
+        return error;
+    }
+
+    // 3. Xử lý trình diễn
     var html = '<ul>';
     data.forEach(user => {
         html += '<li>';
