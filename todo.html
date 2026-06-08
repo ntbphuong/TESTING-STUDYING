@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh sach cong viec can lam</title>
+    <style>
+      .section-them-cong-viec { border: 1px solid red; padding: 10px}
+      .section-danh-sach-cong-viec { border: 1px solid blueviolet; padding: 10px; margin-top: 20px;}
+    </style>
+</head>
+<body>
+    <h1>Danh sach cong viec can lam</h1>
+    <!-- Section -->
+    <section class="section-them-cong-viec">
+        <h2>Them cong viec</h2>
+        <form id="form-todo">
+            <label>Ten Cong Viec</label>
+            <input type="text" id="todo-title-input"/>
+            <br />
+            <button type="submit" id="add-todo-button"> Them Cong Viec</button>
+         </form>
+    </section>
+    <section class="section-danh-sach-cong-viec">
+        <h2>Danh sach cong viec</h2>
+        <ul id="todo-list">
+            <li>
+                <input type="checkbox" id="chk1"/> Ten cong viec
+                <button type="button" id="edit-button1">➖ Sua</button>
+                <button type="button" id="delete-button1">❌ Xoa</button>
+            </li>
+        </ul>
+    </section>
+    <script>
+        // Ham
+        async function loadTodos() {
+            var response = await fetch('http://localhost:3000/todos');
+            if(!response.ok) {
+                document.getElementById('todo-list').innerHTML = '<li> khong load duoc du lieu</li>';
+            }
+            var data = await response.json();
+            //console.log(data);
+            var html ='';
+            data.forEach(job => {
+                html += '<li>';
+                html += `<input type="checkbox" id="chk${job.id}"/><span> Ten cong viec</span>`;
+                html += `<button type="button" id="edit-button${job.id}">➖ Sua</button>>`;
+                html += `<button type="button" id="delete-button${job.id}">❌ Xoa</button>`;
+                html += '</li>';
+
+            });
+            document.getElementById('todo-list').innerHTML = html
+
+            
+
+        }
+        // Goi ham
+        loadTodos();
+    </script>
+</body>
+</html>
