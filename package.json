@@ -32,7 +32,11 @@
     "test:e2e:tinhtiendien": "playwright test --ui",
     "test:bus:tinhtiendien": "vitest run tests/business/CalElec.business.test.js",
     "test:unit:loaduser": "vitest run tests/unit/loaduser.unit.test.js",
-    "test:bus:loaduser": "vitest run tests/business/loaduser.business.test.js"
+    "test:bus:loaduser": "vitest run tests/business/loaduser.business.test.js",
+    "test:e2e:loaduser": "playwright test --ui",
+    "test:e2e:loaduser:report": "playwright show-report"
+    
+
   },
   "devDependencies": {
     "@playwright/test": "^1.60.0",

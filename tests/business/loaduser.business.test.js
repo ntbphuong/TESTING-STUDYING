@@ -21,4 +21,11 @@ describe(" Test plan: Test nghiep vu tai danh sach user", () =>{
 
         expect(soluongli).toBe(10);
     });
+    //Test case 2
+    it("TC-BUS-USER-03: lay du so luong va dung thong tin", async () =>{
+        const html =  await loadUser(USER_API);
+        expect(html).toContain('Leanne Graham');
+        expect(html).toContain('Chelsey Dietrich');
+        expect(html).toContain('Glenna Reichert');
+    });
 });

@@ -1,19 +1,30 @@
 import { test, expect } from "@playwright/test";
 // Mo ta TEST PLAN
-test.describe("Kiem thu chuc nang tinhtien", () => {
+test.describe("Kiem thu API URL", () => {
     // Mo trang chu cho tat ca TC
     test.beforeEach(async({page}) => {
         // Mo trang chu
-        await page.goto("/Chucnangtinhtien.html");
+        await page.goto("/danh-sach-user.html");
     });
     // Test case 1: chua nhap gi, vung thong bao hien thi chu "Vui long nhap so tien"
-    test("TC-LOGIN-001: Hien thi thong bao loi khi bo trong gia tien", async ({page}) => {
+    test("TC-E2E-01: Nhap URL va hien thi danh sach UL LI", async ({page}) => {
         // Thao tac click vao nut co id "btnTinhTien"
-        await page.click("#btnTinhTien");
+        await page.locator('#api-url').fill('https://jsonplaceholder.typicode.com/users');
+        await page.click("#fetch-button");
 
-        // Lay phan tu vung thong bao id #lbtnTinhTien
-        const CNtinhtien = page.locator("#ketqua");
+        await expect(page.locator('#result ul')).toBeVisible();
+        await expect(page.locator('#result li')).toHaveCount(10);
+    }); 
 
-        await expect(CNtinhtien).toHaveText("Vui long nhap so tien");
+    // Test case 2: chua nhap gi, vung thong bao hien thi chu "Vui long nhap so tien"
+    test("TC-E2E-02: Kiem tra du lieu dung", async ({page}) => {
+        // Thao tac click vao nut co id "btnTinhTien"
+        await page.locator('#api-url').fill('https://jsonplaceholder.typicode.com/users');
+        await page.click("#fetch-button");
+        const result = page.locator('#result');
+
+        await expect(result).toContainText('Ervin Howell');
+        await expect(result).toContainText('Kurtis Weissnat');
+        await expect(result).toContainText('Glenna Reichert');
     }); 
 });
