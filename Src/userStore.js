@@ -42,6 +42,7 @@ export async function loadUser(apiUrl){
     const error = validateUser(data);
     if(error != undefined && error !="Du lieu hop le"){
         return error;
+        
     }
 
     // 3. Xử lý trình diễn

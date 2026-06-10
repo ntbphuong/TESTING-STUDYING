@@ -19,7 +19,8 @@
             <input type="text" id="todo-title-input"/>
             <br />
             <button type="submit" id="add-todo-button"> Them Cong Viec</button>
-         </form>
+         </form >
+         <div id="todo-msg"></div>
     </section>
     <section class="section-danh-sach-cong-viec">
         <h2>Danh sach cong viec</h2>
@@ -32,6 +33,33 @@
         </ul>
     </section>
     <script>
+        //Dang ki su kien submit
+        const todoForm = document.getElementById('form-todo');
+        todoForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            // Thu thap thong tin nguoi dung tren giao dien
+            const titleFromUser = document.getElementById('todo-title-input').value;
+        // Chuan bi du lieu goi di payload
+        const payload = {
+            title: titleFromUser,
+            completed: false
+        };
+        // Goi request POST
+        const response = await fetch('http://localhost:3000/todos', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(payload)
+            });
+            // Xu ly response
+            if(!response.ok) {
+                document.getElementById('todo-msg').innerHTML = '<b> Khong luu duoc. </b>';
+            }
+            const savedTodo = response.json();
+                document.getElementById('todo-msg').innerHTML = `Da them cong viec ${savedTodo.id} thanh cong`;
+        });
+
         // Ham
         async function loadTodos() {
             var response = await fetch('http://localhost:3000/todos');
@@ -43,17 +71,40 @@
             var html ='';
             data.forEach(job => {
                 html += '<li>';
-                html += `<input type="checkbox" id="chk${job.id}"/><span> Ten cong viec</span>`;
-                html += `<button type="button" id="edit-button${job.id}">➖ Sua</button>>`;
+                html += `<input type="checkbox" id="chk${job.id}"/><span> ${job.title} </span>`;
+                html += `<button type="button" id="edit-button${job.id}">➖ Sua</button>`;
                 html += `<button type="button" id="delete-button${job.id}">❌ Xoa</button>`;
                 html += '</li>';
 
             });
             document.getElementById('todo-list').innerHTML = html
 
+         // Đăng ký sự kiện click cho từng nút
+            data.forEach(job => {
+                const deleteButton = document.getElementById(`delete-button${job.id}`);
+                deleteButton.addEventListener('click', async () => {
+                    // alert(`đã click nút ${job.id}`);
+                    const confirmed = confirm("Bạn có chắc chắn muốn xóa không?");
+                    if(!confirmed) {
+                        return;
+                    }
+
+                    // Gởi request DELETE đến server
+                    const response = await fetch(`http://localhost:3000/todos/${job.id}`, {
+                        method: 'DELETE'
+                    });
+                    if(!response.ok) {
+                        document.getElementById('todo-msg').innerHTML = '<b>Có lỗi xảy ra, không xóa được.</b>';
+                        return;
+                    }
+
+                    document.getElementById('todo-msg').innerHTML = `<b>Đã xóa ${job.id} thành công!</b>`;
+                });
+            });
+        }
             
 
-        }
+        
         // Goi ham
         loadTodos();
     </script>
