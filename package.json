@@ -43,6 +43,9 @@
     "vitest": "^4.1.8"
   },
   "dependencies": {
-    "json-server": "^1.0.0-beta.15"
+    "jas": "^0.2.1",
+    "json": "^11.0.0",
+    "json-server": "^1.0.0-beta.15",
+    "server": "^1.0.42"
   }
 }

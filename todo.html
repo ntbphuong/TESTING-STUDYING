@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Danh sach cong viec can lam</title>
+    
     <style>
       .section-them-cong-viec { border: 1px solid red; padding: 10px}
       .section-danh-sach-cong-viec { border: 1px solid blueviolet; padding: 10px; margin-top: 20px;}
     </style>
+    <script type="module" src="Src/todoStore.js"> </script>
 </head>
 <body>
     <h1>Danh sach cong viec can lam</h1>
@@ -32,7 +34,24 @@
             </li>
         </ul>
     </section>
-    <script>
+    <script type="module">
+        const API_URL = 'http://localhost:3000/todos';
+
+        // Goi Ham Business de lay html trinh dien
+        const todoHtml = await loadTodos(API_URL);
+        document.getElementById('todo-list').innerHTML = todoHtml;
+
+        //Dang ki su kien submit
+        const todoForm = document.getElementById('form-todo');
+        todoForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            // Thu thap thong tin nguoi dung tren giao dien
+            const titleFromUser = document.getElementById('todo-title-input').value;
+            // Goi ham
+            const savedTodo = await addTodo(API_URL, titleFromUser);
+            document.getElementById('todo-msg').innerHTML = `Da them cong viec ${savedTodo.id} thanh cong`;
+        });
+        /*
         //Dang ki su kien submit
         const todoForm = document.getElementById('form-todo');
         todoForm.addEventListener('submit', async (event) => {
@@ -81,6 +100,7 @@
 
          // Đăng ký sự kiện click cho từng nút
             data.forEach(job => {
+                // Tim nut xoa
                 const deleteButton = document.getElementById(`delete-button${job.id}`);
                 deleteButton.addEventListener('click', async () => {
                     // alert(`đã click nút ${job.id}`);
@@ -100,13 +120,38 @@
 
                     document.getElementById('todo-msg').innerHTML = `<b>Đã xóa ${job.id} thành công!</b>`;
                 });
+                // Tim nut sua
+                const editButton = document.getElementById(`edit-button${job.id}`);
+                editButton.addEventListener('click', async () => {
+                    const newTitle = prompt("Nhập tên công việc mới", job.title);
+                    
+                    // Chuan bi du lieu goi di payload
+                    const payload = {
+                        title: newTitle,
+                            completed: false
+                    };
+                   
+                    // Gởi request PATCH den server
+                    const response = await fetch(`http://localhost:3000/todos/${job.id}`, {
+                        method: 'PATCH',
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(payload)
+                    });
+                    if (!response.ok) {
+                        document.getElementById('todo-msg').innerHTML = '<b>Có lỗi xảy ra, không thể cập nhật.</b>';
+                        return;
+                    }
+                    document.getElementById('todo-msg').innerHTML = `<b>Đã cập nhật ${job.id} thành công!</b>`;
+                });
             });
         }
             
 
-        
+        */
         // Goi ham
-        loadTodos();
+        //loadTodos();
     </script>
 </body>
 </html>
