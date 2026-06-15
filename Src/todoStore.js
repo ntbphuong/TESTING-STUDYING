@@ -18,9 +18,9 @@ export async function loadTodos(apiUrl) {
     var html ='';
     data.forEach(job => {
         html += '<li>';
-        html += `<input type="checkbox" id="chk${job.id}"/><span> ${job.title} </span>`;
-        html += `<button type="button" id="edit-button${job.id}">➖ Sua</button>`;
-        html += `<button type="button" id="delete-button${job.id}">❌ Xoa</button>`;
+        html += `<input type="checkbox" class="todo-checkbox" data-id="${job.id}" id="chk${job.id}" `+ ((job.completed) ? 'checked':'') +`/><span> ${job.title} </span>`;
+        html += `<button type="button" class="btn-edit" data-id="${job.id}" data-title="${job.title}" id="edit-button${job.id}">➖ Sua</button>`;
+        html += `<button type="button" class="btn-delete" data-id="${job.id}"  id="delete-button${job.id}">❌ Xoa</button>`;
         html += '</li>';
 
     });
@@ -31,9 +31,33 @@ export async function loadTodos(apiUrl) {
 if(typeof window !== "undefined") {
     window.loadTodos = loadTodos;
     window.addTodo = addTodo;
+    window.deleteTodo = deleteTodo;
+    window.updateTodo = updateTodo;
+    window.updateTodoStatus = updateTodoStatus;
     
 }
 
+// Ham UNITE: CRUD - UPDATE (cap nhat)
+export async function updateTodoStatus(apiUrl, id, newCompleted) {
+    //1. Chuan bi du lieu payload
+    const payload = {
+        completed: newCompleted
+    };
+    //2. Goi request update
+    const response = await fetch(`${apiUrl}/${id}`, {
+        method: 'PATCH',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+    });
+    if(!response.ok) {
+        throw new Error("ERR004: Khong cap nhat duoc du lieu");
+    }
+    //2. Boc tach du lieu, xu ly
+    return await response.json();
+    
+}
     
 // Ham UNITE: CRUD - CREATE (tao moi)
 export async function addTodo(apiUrl, newtitle) {
@@ -73,10 +97,10 @@ export async function deleteTodo(apiUrl, id) {
 }
 
 // Ham UNITE: CRUD - UPDATE (cap nhat)
-export async function updateTodo(apiUrl, id) {
+export async function updateTodo(apiUrl, id, newtitle) {
     //1. Chuan bi du lieu payload
     const payload = {
-        title: newTodo.title,
+        title: newtitle,
         completed: false
     };
     //2. Goi request update

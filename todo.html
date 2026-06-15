@@ -51,6 +51,56 @@
             const savedTodo = await addTodo(API_URL, titleFromUser);
             document.getElementById('todo-msg').innerHTML = `Da them cong viec ${savedTodo.id} thanh cong`;
         });
+
+        //Dang ky event click cho cac phan tu co1 class btn-delete
+        const lstdeletebutton = document.querySelectorAll('.btn-delete');
+        lstdeletebutton.forEach((btn) => {
+            const id = btn.dataset.id;
+
+            btn.addEventListener('click', async (event) =>{
+                // Lay gia tri cua thuoc tinh
+                // alert( da click id =" + id")
+                 const ok = confirm("Bạn có chắc chắn muốn xóa không?");
+                    if(!ok) {
+                        return;
+                    }
+                // goi ham xoa ...
+                 const deletedJob = await deleteTodo(API_URL, id);
+
+                document.getElementById('todo-msg').innerHTML = `<b>Đã xóa ${deletedJob.id} thành công!</b>`;
+            });
+
+        });
+
+        //Dang ky event click cho cac phan tu co1 class btn-edit
+        const lsteditbutton = document.querySelectorAll('.btn-edit');
+        lsteditbutton.forEach((btn) => {
+            const id = btn.dataset.id;
+            const title = btn.dataset.title;
+
+            btn.addEventListener('click', async (event) =>{
+                const newtitle = prompt("Nhập tên công việc mới", title)
+                    
+                // goi ham sua ...
+                const updatejob = await updateTodo(API_URL, id, newtitle);
+
+                 document.getElementById('todo-msg').innerHTML = `<b>Đã cập nhật ${updatejob.id} thành công!</b>`;
+            });
+
+        });
+
+        //Dang ky event change cho cac checkbox co class todo-checkbox
+        const lstcheckbox = document.querySelectorAll('.todo-checkbox');
+        lstcheckbox.forEach((chk) => {
+            const id = chk.dataset.id;
+            chk.addEventListener("change", (event) => {
+                var isCompleted = event.target.checked;
+                // Goi ham cap nhat trang thai completed
+                const updatejob = updateTodoStatus(API_URL, id, isCompleted);
+                document.getElementById('todo-msg').innerHTML = `<b>Đã cập nhật ${updatejob.id} thành công!</b>`;
+            });
+
+        });
         /*
         //Dang ki su kien submit
         const todoForm = document.getElementById('form-todo');
