@@ -34,7 +34,9 @@
     "test:unit:loaduser": "vitest run tests/unit/loaduser.unit.test.js",
     "test:bus:loaduser": "vitest run tests/business/loaduser.business.test.js",
     "test:e2e:loaduser": "playwright test --ui",
-    "test:e2e:loaduser:report": "playwright show-report"
+    "test:e2e:loaduser:report": "playwright show-report",
+    "test:unit:todo": "vitest run tests/unit/todo.unit.test.js",
+    "test:bus:todo": "vitest run tests/business/todo.business.test.js"
   },
   "devDependencies": {
     "@playwright/test": "^1.60.0",
