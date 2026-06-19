@@ -36,13 +36,14 @@
     "test:e2e:loaduser": "playwright test --ui",
     "test:e2e:loaduser:report": "playwright show-report",
     "test:unit:todo": "vitest run tests/unit/todo.unit.test.js",
+    "test:e2e:todo": "playwright test tests/e2e/todo.e2e.spec.js",
     "test:bus:todo": "vitest run tests/business/todo.business.test.js"
   },
   "devDependencies": {
-    "@playwright/test": "^1.60.0",
-    "@vitest/coverage-v8": "^4.1.8",
+    "@playwright/test": "^1.61.0",
+    "@vitest/coverage-v8": "^4.1.9",
     "http-server": "^14.1.1",
-    "vitest": "^4.1.8"
+    "vitest": "^4.1.9"
   },
   "dependencies": {
     "jas": "^0.2.1",
